@@ -10,8 +10,8 @@ const App = () => {
     <div>
       {/* <CounterWithUndoRedo />
       <DropdownWithOutsideClick /> */}
-      <InlineEditableInput />
-      {/* <TemperatureConverter /> */}
+      {/* <InlineEditableInput /> */}
+      <TemperatureConverter />
     </div>
   );
 };

@@ -1,60 +1,60 @@
 import React, { useState } from "react";
 
 const Search = () => {
-  // take a state for editing input or not
-  const [isEditing, setEditing] = useState(false);
+  // track temperature value in celcius
+  const [celsius, setCelsius] = useState("");
 
-  // take a text as a current value
-  const [text, setText] = useState("edit here");
+  // track temperature value in fahrenfiet
+  const [fahrenheit, setFahrenheit] = useState("");
 
-  // enable to edit click when we click on edit
-  const handleEditClick = () => {
-    setEditing(true);
+  // when celsius changes then convert to fahrenheit
+  const handleCelsiusChnage = (event) => {
+    const value = event.target;
+    setCelsius(value);
   };
 
-  // uodate state when text is changed
-  const handleChange = (event) => {
-    setText(event.target.value);
-  };
+  // it's valid value then convert to fahrenheit
+  if (!isNaN(value) && value !== "") {
+    const f = (parseFloat(value) * 9) / 5 + 32;
+    setFahrenheit(f.toFixed(2));
+  } else {
+    setFahrenheit("");
+  }
 
-  // exist edit mode on blur (click outside)
+  const handleFahrenheit = (event) => {
+    const value = event.target;
+    setFahrenheit(value);
 
-  const handleOutsideBlue = () => {
-    setEditing(false);
-  };
-
-  // exit edit mode when enter Enter button
-  const handleEnterKey = (event) => {
-    if (event.key === "Enter") {
-      setEditing(false);
+    // it value change feh change then convert to celcisu
+    if (!isNaN(value) && value !== "") {
+      const c = ((parseFloat(value) - 32) * 5) / 9;
+      setCelsius(c.toFixed(2));
+    } else {
+      setCelsius("");
     }
   };
+
   return (
-    <div style={{ margin: "50px", textAlign: "center" }}>
-      {isEditing ? (
+    <div style={{ textAlign: "center", margin: "10px" }}>
+      <h1>Temperature Convertor Celsius to fahrenheit</h1>
+      <lable Celcius:nbsp>
         <input
           type="text"
-          value={text}
-          onChange={handleChange}
-          onBlur={handleOutsideBlue}
-          onKeyDown={handleEnterKey}
-          autoFocus
-          style={{ fontSize: "20px", padding: "4px" }}
+          value={celsius}
+          onChange={handleCelsiusChnage}
+          placeholder="Enter Cel."
         />
-      ) : (
-        // show plain text when no editing
-        <span
-          onClick={handleEditClick}
-          style={{ cursor: "pointer", fontSize: "20px" }}
-          // make focusable for accessbility
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") handleEditClick(); // keyboard access for accessibility
-          }}
-        >
-          {text}
-        </span>
-      )}
+      </lable>
+      <div>
+        <label Fahrenheit nbsp>
+          <input
+            type="text"
+            value={fahrenheit}
+            onChange={handleFahrenheit}
+            placeholder="Enter Feh."
+          />
+        </label>
+      </div>
     </div>
   );
 };
