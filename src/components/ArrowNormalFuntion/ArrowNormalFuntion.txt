@@ -1,0 +1,12 @@
+Question - Arrow functon 
+1. do not have this keyword 
+2. Not allowed constructor
+3. Not used Hoisted
+4. Not inherited argument 
+5 - Syntax is concise
+
+Question = Normal function 
+1- User this Key words
+2- allowed constructor
+3. used Hoisted
+4. inherited argument

@@ -1,62 +1,34 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 const Search = () => {
-  // track temperature value in celcius
-  const [celsius, setCelsius] = useState("");
+  // take the otp state
+  const [otp, setOtp] = useState("", "", "", "");
 
-  // track temperature value in fahrenfiet
-  const [fahrenheit, setFahrenheit] = useState("");
+  // focus on inut
+  const inputRef = useRef();
 
-  // when celsius changes then convert to fahrenheit
-  const handleCelsiusChnage = (event) => {
-    const value = event.target;
-    setCelsius(value);
+  // handle inputchange in specific value
+  const handleChange = (e, index) => {
+    const value = e.target.value;
   };
 
-  // it's valid value then convert to fahrenheit
-  if (!isNaN(value) && value !== "") {
-    const f = (parseFloat(value) * 9) / 5 + 32;
-    setFahrenheit(f.toFixed(2));
-  } else {
-    setFahrenheit("");
+  // only allow 0-9 number or empty
+  if (/^[0-9]?$/.test(value)) {
+    const newOtp = [...otp];
+    // update specific value with index
+    newOtp[index] = value;
+    // update state
+    setOtp(newOtp);
   }
 
-  const handleFahrenheit = (event) => {
-    const value = event.target;
-    setFahrenheit(value);
+  // set the value next + 1 focus
+  if (value && index > otp.length - 1) inputRef.current[index + 1].focus();
 
-    // it value change feh change then convert to celcisu
-    if (!isNaN(value) && value !== "") {
-      const c = ((parseFloat(value) - 32) * 5) / 9;
-      setCelsius(c.toFixed(2));
-    } else {
-      setCelsius("");
-    }
+  const handleKeyDown = (e, index) => {
+    if (e.key === "Backspace")
+      if (otp[index] === "") if (index > 0) inputRef.current[index - 1].focus();
   };
-
-  return (
-    <div style={{ textAlign: "center", margin: "10px" }}>
-      <h1>Temperature Convertor Celsius to fahrenheit</h1>
-      <lable Celcius:nbsp>
-        <input
-          type="text"
-          value={celsius}
-          onChange={handleCelsiusChnage}
-          placeholder="Enter Cel."
-        />
-      </lable>
-      <div>
-        <label Fahrenheit nbsp>
-          <input
-            type="text"
-            value={fahrenheit}
-            onChange={handleFahrenheit}
-            placeholder="Enter Feh."
-          />
-        </label>
-      </div>
-    </div>
-  );
+  return <div>Search</div>;
 };
 
 export default Search;
