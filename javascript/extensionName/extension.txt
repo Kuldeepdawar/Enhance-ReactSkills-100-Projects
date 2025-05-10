@@ -1,0 +1,23 @@
+1. .js - regular javascript file
+2. JSX - javascript and JSX extenstion used with React component
+3. .ts = typeScript file 
+4. .tsx = used with typeScript + React with types 
+
+Qustion - Shallow copy is not safe for nested structure and if you want sepration work
+Example -
+const original = {name: "kuldeep", address: {city: "ambala"}}
+
+const Shallow = {...original}
+
+Shallow.name = "dawar" // changed 
+Shallow.address.city = "karnal" // changed
+
+Question: Deep copy is copied completely independent and don't change in the original
+
+const details = {name: "kaalu", address: {city: "karnal"}}
+
+// deep use json
+const deep = JSON.parse(JSON.stringify(details))
+
+deep.address.city = "ambala"
+console.log(details.address.city) = karnal
